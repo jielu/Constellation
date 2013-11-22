@@ -1,0 +1,1 @@
+java -classpath ./lib/insect.jar:./lib/jaba.jar:./lib/bcel.jar insect.coverage.instrumentation.Instrumentor $*

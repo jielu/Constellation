@@ -1,0 +1,1 @@
+java -ea -mx1000m -classpath .:lib/insect.jar:lib/jaba.jar jaba.main.JABADriver insect.jaba.JABAOptimizer $*

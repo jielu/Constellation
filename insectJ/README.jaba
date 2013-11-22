@@ -1,0 +1,282 @@
+InsECT (JABA-compatible) Usage Documentation
+--------------------------------------------
+
+InsECT (INStrumentation Execution Coverage Tool) is a coverage tool
+for Java software.  Through the use of bytecode instrumentation,
+InsECT can obtain statement, branch, method call, thrown exception,
+and caught exception coverage.  InsECT can also be used to obtain
+profiling information or extended for various types of dynamic
+analysis. Furthermore, InsECT provides the facility for utilizing
+static analysis to precompute dynamic information in order to optimize
+the instrumentation.
+
+InsECT relies on the following packages: JABA, BCEL
+This distribution of InseCT also includes the InsECT GUI, JUnit
+support, and a facility for call coverage optimizations.
+Each of these features specifically rely on the JABA library.
+
+There are three steps to determing program coverage using InsECT:
+
+	1) Instrumenting the classfiles
+	2) Executing the program
+	3) Requesting coverage/profiling
+
+NOTE: Currently, InsECT has only been tested and used within
+Linux/Unix environments.  All included scripts are for these
+platforms.  However, the scripts are only for convenience in
+specifying the classpath and full Java driver class name, and InsECT
+should be usable on all other platforms.
+
+
+I.  Set up
+
+InsECT can be compiled using the included Ant buildfile.  Some of the
+Ant targets are:
+
+  - compile (default) 	compiles the source code and places it in
+			the classes directory
+  - javadoc 		creates the Javadoc documentation and places
+			it in the javadoc directory
+  - jar			creates a JAR file containing the InsECT
+			classes and places it in the lib directory
+  - clean		deletes the compiled classes, Javadocs, and
+			JAR file
+
+
+BCEL (The Bytecode Engineering Library)  is available at:
+http://jakarta.apache.org/bcel/
+
+JABA can be acquired by contacting us by email at insect@cc.gatech.edu.
+
+Both libraries should be placed in the lib/ directory, with BCEL as
+bcel.jar and JABA as jaba.jar.  Of course you may place them in
+another location with another name, but then you must update build.xml
+and the instrument/execute scripts. All scripts also assume an
+insect.jar file in the lib directory.
+
+In order to describe the system being analyzed, InsECT uses a
+"resource file".  A resource file mainly consists of a set of classes
+and the classpaths of libraries used by the system.  The
+./build_arc.pl script provided with this distribution is a Perl script
+to automatically generate a resource file for InsECT. You can run the
+script with the -h option for usage instructions.
+
+Before using InsECT, you must create a ".insect" file in your HOME
+directory.  This file must contain the following entry:
+
+	INSTRUMENTED = <directory to store instrumented programs>
+
+The following entries control the level of instrumentation, and should
+also be included:
+
+	BRANCHCOVERAGE = <true or false>
+	BLOCKCOVERAGE = <true or false>
+	CALLCOVERAGE = <true or false>
+	EXTCALLCOVERAGE = <true or false>
+	CATCHCOVERAGE = <true or false>
+	THROWCOVERAGE = <true or false>
+
+Note that EXTCALLCOVERAGE determines if method calls to methods
+outside the analyzed system (such as library calls) should be
+instrumented, while CALLCOVERAGE only pertains to method calls within
+the instrumented system.
+
+Finally, the following entries control extra features available in
+InsECT:
+
+	PROFILE = <true or false>
+	OPTIMIZE = <0 or 1 or 2>
+
+The PROFILE option enables profiling of method calls, branches, and
+statements. Profiling, in this context, refers to the number of times
+a particular code construct is executed during an execution.  The
+OPTIMIZE option is described later in this document, but in most cases
+OPTIMIZE should be set to 0 (off).  The EXECID option is useful for
+executing an instrumented program without using the InsECT Executor.
+Setting the option to "sequence" will give each execution of the
+program an identifier of the next available sequence number.
+Otherwise, the execution identifier will be a timestamp.
+
+II.  Instrumenting
+
+There are two ways you can use the Instrumentor: through the command
+line with the provided script, or within Java by creating an
+Instrumentor object.
+
+a) The syntax of the command line script is:
+
+./instrument <resource file> [<optional class list>]
+
+The <resource file> is a JABA resource file, and the <optional class
+list> is a text file listing the full path of each classfile to be
+instrumented (one per line).  If the class list is omitted, all files
+in the resource file will be instrumented.
+
+b) The insect.coverage.instrumentation.Instrumentor object can be used
+   as follows:
+
+(NOTE: you must have BCEL in your classpath)
+
+* public Instrumentor (String rcFile, String classList);
+
+	Instrumentor  i = 
+	  new Instrumentor(<resource file path>, <classlist path>);
+
+* public void instrument();
+
+	i.instrument();
+
+
+III.  Executing
+
+NOTE: There are currently some problems with the Executor. You do not
+have to use the Executor for running instrumented programs.  In fact,
+you can simply execute the program as you normally would by including
+insect.jar in the classpath.
+
+The Executor can be used in the same two ways as the Instrumentor.
+
+(NOTE: The Executor currently only works in Linux/Unix)
+
+a) The syntax of the command line script is:
+
+./execute <resource file> <exec_id> [-cp:<optional classpaths>]
+		<main class> [<optional args>]
+
+The <exec_id> is the identifier for the current execution, and can be
+any valid directory name.  The <optional classpaths> must be preceeded
+by "-cp:" and must be separated by ":". Do not leave a space between
+"-cp:" and the first classpath. The <main class> is the fully
+qualified name of the class containing the main method to
+execute. Finally, <optional args> are the command line arguments for
+the main class.
+
+b) The insect.coverage.execution.Executor object can be used as follows:
+
+* public Executor (String rcFile);
+
+	Executor e = new Executor(<resource file>);
+
+* public boolean execute(String execID, String[] classPathNames,
+				String mainClass, String args[]);
+
+	e.execute(<exec_id>, <classpaths[]>, <mainclass>, <args[]>);
+
+
+IV.  The InsECT GUI
+
+This distribution of InsECT includes a graphical user interface for
+viewing coverage information.  It utilizes the JABA coverage
+interfaces to provide this information. To use the GUI, either run the
+class insect.gui.InsectGUI or use the ./gui script.  The script can be
+used as follows:
+
+	./gui [<resource file>] [<source code directory path>]
+
+Note that both parameters are optional.
+
+
+V.  Coverage
+
+Coverage information can only be accessed by creating an 
+insect.coverage.analysis.jaba.JABACoverage object:
+
+* public JABACoverage (String rcFile);
+
+	JABACoverage c = new JABACoverage(<resource file>);
+	
+The JABACoverage class contains numerous wasCovered(...) methods that
+can be called on the graph nodes and edges. Please consult the
+Javadocs for more information.
+
+
+VI.  Profiling
+
+Profiling information can only be accessed by creating an
+insect.coverage.analysis.jaba.JABAProfiling object:
+
+* public Profiling (String rcFile);
+
+	JABAProfiling p = new JABAProfiling(<resource file>);
+	
+The JABAProfiling class contains numerous timesExecuted(...) methods
+that can be called on the graph nodes and edges.  Please consult the
+Javadocs for more information.
+
+
+VII.  Optimization
+
+As stated above, InsECT provides the facility for utilizing static
+analysis to precompute dynamic information in order to optimize the
+instrumentation.  Currently, this only applies to the call coverage
+instrumentation (as it is by far the most "expensive" instrumentation
+in terms of performance overhead).  In order to obtain call coverage,
+InsECT must determine the dynamic type of the object on which a method
+is invoked at runtime.  With that information, InsECT can determine
+how that method dynamically bound.  The instrumentation done to obtain
+this information is fairly complex and induces a large amount of
+performance overhead.  Therefore, InsECT allows for using a static
+analysis technique such as virtual-call resolution to precompute this
+information so that the complex instrumentation need not be performed
+for every method call.  There are two levels of optimization that
+InsECT supports: Level 1 optimization requires both the target method
+and invocation object to be resolved prior to instrumentation.  Level
+2 optimization requires only that the target method is resolved prior
+to instrumentation.  Note that with Level 2 optimization, the object
+type information for method calls will not be available when obtaining
+coverage of a system.  However in many types of analsys this is
+acceptable since knowing the target method is what is important.  If
+either optimization level is enabled, there must be a
+"calls.optimized" file in the directory of the instrumented program
+prior to instrumentation. The insect.jaba.JABAOptimizer class provides
+facilities for generating the "calls.optimized" file.  The provided
+./jabaopt script can be used for executing the JABAOptimizer as
+follows:
+
+	./jabaopt <resource file>
+
+
+VIII.  JUnit Support (JABA dependent)
+
+InsECT provides support for JUnit TestCases with the
+insect.junit.JUnitDriver class.  From the command line, you can invoke
+this class using the ./junit script:
+
+./junit <resource file> [<optional class list>]
+
+The provided resource file should include both the classes belonging
+to the system to instrument, as well as the classes containing the
+JUnit TestCases.  The JUnitDriver will automatically distinguish
+between these two types of classes, instrument the program classes,
+execute the included JUnit TestCases, and report any errors/failures.
+Coverage can then be accessed for these test cases just as if the
+Instrumentor and Executor had been used.  Alternatively, you can
+create and use a insect.junit.JUnitDriver object as follows:
+
+* public JUnitDriver (String rcPath, String classListPath);
+
+	JUnitDriver j =
+	  new JUnitDriver(<resource file path>, class list path>);
+
+* public Vector instrumentAndTest();
+	
+	j.instrumentAndTest();
+
+* public void instrumentNonTestClasses() {
+
+	j.instrumentNonTestClasses();
+
+* public Vector executeTests() {
+
+	j.executeTests();
+
+Note that instrumentAndTest() simply performs
+instrumentNonTestClasses() followed by executeTests().  The vector
+returned by executeTests contains any TestFailure objects resulting
+from the executed test cases.
+
+
+IX. Questions
+
+If you have any questions/bugs/problems, please contact us at
+insect@cc.gatech.edu.

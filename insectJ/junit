@@ -1,0 +1,2 @@
+java -ea -mx1000m -classpath lib/insect.jar:lib/jaba.jar:lib/bcel.jar:lib/Gretel.jar:lib/junit.jar jaba.main.JABADriver insect.junit.JUnitDriver $*
+

@@ -1,0 +1,1 @@
+java -classpath ./lib/insect.jar:./lib/jaba.jar insect.coverage.execution.Executor $*

@@ -1,0 +1,11 @@
+insect
+insect.coverage.analysis
+insect.coverage.analysis.jaba
+insect.coverage.execution
+insect.coverage.instrumentation
+insect.gui
+insect.gui.dialogs
+insect.gui.frames
+insect.gui.infos
+insect.jaba
+insect.junit

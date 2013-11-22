@@ -1,0 +1,5 @@
+ProgramName = Example-v1
+ClassPath = :/Users/jielu/Documents/workspace/ReTest/dejavoo/example/v1:/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Classes/classes.jar
+ClassFiles = \
+example.Main, \
+example.Example

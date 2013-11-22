@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<project name="InsECT" default="compile" basedir=".">
+
+	<!-- Properties -->
+	<property name="src.dir" value="src"/>
+	<property name="classes.dir" value="classes"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="javadoc.dir" value="javadoc"/>
+	<property name="generic.insect.jar" 
+		value="${lib.dir}/generic-insect.jar"/>
+	<property name="insect.jar" 
+		value="${lib.dir}/insect.jar"/>	
+
+	<!-- External library jars -->
+	<path id="libs.path">
+		<fileset dir="${lib.dir}">
+			<patternset>
+				<include name="*.jar"/>
+			</patternset>
+		</fileset>
+	</path>
+
+	<target name="compile">
+		<mkdir dir="${classes.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${classes.dir}"
+			classpathref="libs.path" source="1.4">
+		</javac>
+	</target>
+
+	<target name="generic-jar" depends="compile">
+		<jar basedir="${classes.dir}" destfile="${generic.insect.jar}"
+				excludes="**/jaba/*, **/junit/*, **/gui/*"/>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar basedir="${classes.dir}" destfile="${insect.jar}"/>			
+	</target>
+	
+	<target name="generic-javadoc">
+		<mkdir dir="${javadoc.dir}"/>
+		<javadoc sourcepath="${src.dir}" classpathref="libs.path"
+			 destdir="${javadoc.dir}"  packagenames="insect.*"
+			 excludepackagenames="insect.jaba, insect.junit, insect.gui.*, insect.coverage.analysis.jaba"/>
+	</target>
+	
+	<target name="javadoc">
+		<mkdir dir="${javadoc.dir}"/>
+		<javadoc sourcepath="${src.dir}" classpathref="libs.path"
+			 destdir="${javadoc.dir}"  packagenames="insect.*" />
+	</target>
+	
+	<target name="clean">
+		<delete dir="${classes.dir}"/>
+		<delete dir="${javadoc.dir}"/>
+		<delete file="${generic.insect.jar}"/>
+		<delete file="${insect.jar}"/>
+	</target>
+</project>
+
+
