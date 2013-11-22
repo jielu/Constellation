@@ -20,41 +20,7 @@ public class CoverageData {
 	 * @time running time for test execName (ms)
 	 */
 	public static synchronized void saveCoverageData(String execName, TestResult result) {
-//		Long startTime = System.currentTimeMillis() ;
-//		
-//		// get execution path
-//		String progName = insect.InsectValues.progName;
-//		String instDir = ConfigFile.getProperty("INSTRUMENTED");
-//		String execPath = instDir + File.separator + progName + File.separator
-//				+ execName + ".xd";
-//		System.out.println("InsECT: Placing execution output in directory "
-//				+ execPath);
-//
-//		// create execution directory
-//		File execDir = new File(execPath);
-//		execDir.mkdirs();
-//
-//		// generate execution serial file
-//		outputSerial(execPath);
-		
-		// output block hit coverage
-		String prop;
-		if ((prop = ConfigFile.getProperty("BLOCKCOVERAGE")) != null
-				&& prop.toUpperCase().equals("TRUE")) {
-			BlockMonitor.saveBlockCoverage(execName, result);
-		}
 
-		// output branch hit coverage
-		if ((prop = ConfigFile.getProperty("BRANCHCOVERAGE")) != null
-				&& prop.toUpperCase().equals("TRUE")) {
-			BranchMonitor.saveBranchCoverage(execName);
-		}
-//
-//		double runtime2 = (System.currentTimeMillis() - startTime.longValue()) / 1000.0;
-//		runtime = runtime + runtime2;
-//		
-//		// generate runtime file
-//		outputRuntime(execPath, runtime);
 	}
 
 	/**
