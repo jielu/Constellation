@@ -34,6 +34,10 @@ public class TestRunnerMapper<K> extends MapReduceBase implements
 
 	private JUnitCore junitCore;
 
+	static enum MyCounters {
+		PASSED, FAILED
+	}
+	
 	public void configure(JobConf job) {
 		junit3Lib = job.get("testRunnerMapper.junit3.lib");
 		junit4Lib = job.get("testRunnerMapper.junit4.lib");
@@ -71,13 +75,13 @@ public class TestRunnerMapper<K> extends MapReduceBase implements
 				if (isJunit3) {
 					if (method.getModifiers() == Modifier.PUBLIC
 							&& methodName.startsWith("test")) {
-						runTestMethod(testClass, methodName, output);
+						runTestMethod(testClass, methodName, output, reporter);
 					}
 				} else {
 					org.junit.Test annotation = method
 							.getAnnotation(org.junit.Test.class);
 					if (annotation != null) {
-						runTestMethod(testClass, methodName, output);
+						runTestMethod(testClass, methodName, output, reporter);
 					}
 				}
 			}
@@ -93,7 +97,7 @@ public class TestRunnerMapper<K> extends MapReduceBase implements
 
 	// Run test method and get coverage data
 	private void runTestMethod(Class testClass, String methodName,
-			OutputCollector<IntWritable, Text> output) {
+			OutputCollector<IntWritable, Text> output, Reporter reporter) {
 		System.out.println(testClass.getCanonicalName());
 
 		Request request = Request.method(testClass, methodName);
@@ -102,7 +106,12 @@ public class TestRunnerMapper<K> extends MapReduceBase implements
 		System.out.println(testResult.wasSuccessful());
 //		testResult.getFailures().get(0).getException().printStackTrace();
 //		System.out.println(testResult.);
-
+		if(testResult.wasSuccessful()) {
+			reporter.incrCounter(MyCounters.PASSED, 1);
+		} else {
+			reporter.incrCounter(MyCounters.FAILED, 1);
+		}
+		
 		try {
 			Class bm = Class.forName("insect.coverage.execution.BlockMonitor",
 					true, loader);
