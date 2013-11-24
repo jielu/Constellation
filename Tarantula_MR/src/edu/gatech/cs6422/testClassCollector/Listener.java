@@ -10,8 +10,8 @@ public class Listener extends RunListener {
 	public static Set<String> classSets = new HashSet<String>();
 	
 	public void testStarted(Description desc){
-		classSets.add(desc.getClassName());
-		System.out.println(desc.getClassName());
+//		classSets.add(desc.getClassName());
+//		System.out.println(desc.getClassName());
 	}
 	
 	public void testFailure(Failure f){

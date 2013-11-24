@@ -37,11 +37,11 @@ public class Test extends Configured implements Tool {
 	} // singleton
 
 	public int run(String[] args) throws Exception {
-		// if (args.length < 3) {
-		// System.out.println("Test");
-		// ToolRunner.printGenericCommandUsage(System.out);
-		// return -1;
-		// }
+		 if (args.length < 4) {
+		 System.out.println("Usage: bin/hadoop jar test.jar <input_path> <junit4_lib> <junit3_lib> <classpath>");
+		 ToolRunner.printGenericCommandUsage(System.out);
+		 return -1;
+		 }
 
 		Path tempDir = new Path("grep-temp-"
 				+ Integer.toString(new Random().nextInt(Integer.MAX_VALUE)));
@@ -53,18 +53,18 @@ public class Test extends Configured implements Tool {
 			grepJob.setJobName("grep-search");
 
 			FileInputFormat.setInputPaths(grepJob,
-					"/home/yjy/workspace/Hadoop/testClass");
+					args[0]);
 
 			grepJob.setMapperClass(TestRunnerMapper.class);
 			grepJob.set(
 					"testRunnerMapper.junit4.lib",
-					"file:///home/yjy/eclipse-standard-kepler-R-linux-gtk-x86_64/eclipse/plugins/org.junit.source_4.11.0.v201303080030.jar");
+					args[1]);
 			grepJob.set(
 					"testRunnerMapper.junit3.lib",
-					"file:///Users/jielu/Dropbox/workspace2013F/cs6422/hadoop-1.2.1/example/lib/junit3.jar");
+					args[2]);
 			grepJob.set(
 					"testRunnerMapper.classpath",
-					"file:////home/yjy/workspace/deliverables/deliverables/.coverage_data/godoil/;file:///home/yjy/workspace/Hadoop/class/;file:///home/yjy/workspace/Constellation/insectJ/lib/insect.jar");
+					args[3]);
 
 			// grepJob.setCombinerClass(LongSumReducer.class);
 			grepJob.setReducerClass(TestRunnerReducer.class);

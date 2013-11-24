@@ -57,7 +57,7 @@ public class BlockMonitor {
 			insect.coverage.execution.CounterMonitor.counter.increment();
 
 			blocks = new long[insect.InsectValues.blockSize];
-
+			System.out.println("### " + insect.InsectValues.blockSize);
 			Debug.println("*** BlockMonitor init", 5);
 
 			Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {

@@ -217,10 +217,10 @@ public class Executor {
 	 */
 	public void initMonitors() {
 		BlockMonitor.init();
-		BranchMonitor.init();
-		CallMonitor.init();
-		ThrowMonitor.init();
-		CatchMonitor.init();
+	//	BranchMonitor.init();
+	//	CallMonitor.init();
+	//	ThrowMonitor.init();
+	//	CatchMonitor.init();
 	}
 
 	/**
@@ -229,10 +229,10 @@ public class Executor {
 	 */
 	public void quitMonitors() {
 		BlockMonitor.quit();
-		BranchMonitor.quit();
-		CallMonitor.quit();
-		ThrowMonitor.quit();
-		CatchMonitor.quit();
+	//	BranchMonitor.quit();
+	//	CallMonitor.quit();
+	//	ThrowMonitor.quit();
+	//	CatchMonitor.quit();
 	}
 
 	/**

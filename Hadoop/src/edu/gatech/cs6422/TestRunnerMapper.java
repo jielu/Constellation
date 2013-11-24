@@ -122,7 +122,7 @@ public class TestRunnerMapper<K> extends MapReduceBase implements
 					test.append(testResult.wasSuccessful() == true ? "P" : "F");
 					output.collect(new IntWritable(j),
 							new Text(test.toString()));
-					System.out.println("coverage[j]: " + j + "， " + test.toString());
+					System.out.println("coverage[j]: " + j + ": " + test.toString());
 				}
 			}
 		} catch (ClassNotFoundException e) {

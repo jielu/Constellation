@@ -30,16 +30,13 @@ public class Test{
 			
 			//java -ea -mx1000m -classpath /Users/jielu/Dropbox/workspace/ARG/ReTest/dejavoo/lib/insect.jar
 			//:/Users/jielu/Dropbox/workspace/ARG/ReTest/dejavoo/lib/jaba.jar insect.coverage.execution.Executor
-			String rcFile = "/Users/jielu/Dropbox/workspace/ARG/subjects/JABARegressionTestingAndVersions/JabaVersions/jaba.v1/jaba.jrc";
-			String execID = "testJaba1";
+			String rcFile = "/Users/jielu/Dropbox/workspace2013F/ReTest/deliverables/example/v1.jrc";
+			String execID = "test";
 			String[] classPathNames = new String[1];
-			classPathNames[0] = "/Users/jielu/Dropbox/workspace/ARG/subjects/JABARegressionTestingAndVersions/JABARegressionTesting/drivers";
-			String main = "jaba.main.JABADriver";
-			String[] newArgs = new String[3];
-			newArgs[0] = "ACFGDriver";
-			newArgs[1] = "-l";
-			newArgs[2] = "/Users/jielu/Dropbox/workspace/ARG/subjects/JABARegressionTestingAndVersions/JABARegressionTesting/"
-					+ "/subject//BigSubjects/antlr-2.6.0/antlr.rc";
+			classPathNames[0] = "/Users/jielu/Dropbox/workspace2013F/ReTest/deliverables/.coverage_data/Example-v1";
+			String main = "example.Main";
+			String[] newArgs = new String[1];
+			newArgs[0] = "1";
 			
 			Executor executor = new Executor(rcFile);
 			executor.execute(execID, classPathNames, main, newArgs);

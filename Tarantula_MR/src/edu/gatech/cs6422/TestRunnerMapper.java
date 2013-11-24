@@ -1,6 +1,7 @@
 package edu.gatech.cs6422;
 
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -35,13 +36,25 @@ public class TestRunnerMapper<K> extends MapReduceBase implements
 	private JUnitCore junitCore;
 
 	public void configure(JobConf job) {
+		
 		junit3Lib = job.get("testRunnerMapper.junit3.lib");
 		junit4Lib = job.get("testRunnerMapper.junit4.lib");
 		classPath = job.get("testRunnerMapper.classpath");
 
 		try {
-			loader = new URLClassLoader(new URL[] { new URL(classPath),
-					new URL(junit3Lib), new URL(junit4Lib) });
+			String[] cps = classPath.split(";");
+//			URL[] urls = new URL[cps.length + 2];
+//			urls[0] = new URL(junit3Lib);
+//			urls[1] = new URL(junit4Lib);
+//			for(int i=0; i<cps.length; i++){
+//				System.out.println("#####" + cps[i]);
+//				urls[i+2] = new URL(cps[i]);
+//			}
+			URL[] url = new URL[]{ new URL("file:///Users/jielu/Dropbox/workspace2013F/ReTest/deliverables/.coverage_data/test/"),
+					new URL("file:///Users/jielu/Dropbox/insect.jar"),
+					new URL("file:///Users/jielu/Dropbox/workspace2013F/cs6422/hadoop-1.2.1/example/testcase/")
+			};
+			loader = new URLClassLoader(url);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -51,35 +64,72 @@ public class TestRunnerMapper<K> extends MapReduceBase implements
 	public void map(K key, Text value,
 			OutputCollector<IntWritable, Text> output, Reporter reporter)
 			throws IOException {
-		junitCore = new JUnitCore();
-
+		
 		try {
-			// Load test case class
-			Class testClass = Class.forName(value.toString(), true, loader);
-			boolean isJunit3 = testClass.getSuperclass().getName().equals("junit.framework.TestCase");
-
+			URL[] url = new URL[]{ new URL("file:///Users/jielu/Dropbox/workspace2013F/ReTest/deliverables/.coverage_data/test/"),
+					new URL("file:///Users/jielu/Dropbox/insect.jar"),
+					new URL("file:///Users/jielu/Dropbox/workspace2013F/cs6422/hadoop-1.2.1/example/testcase/")
+			};
+			URLClassLoader loader = new URLClassLoader(url);
+			Class testClass = Class.forName("god.oil.v587.TestEntry", true, loader);
+			
 			Method[] methods = testClass.getMethods();
 			for(int i=0; i<methods.length; i++){
 				Method method = methods[i];
 				String methodName = method.getName();
-				if(isJunit3){
-					if(method.getModifiers() == Modifier.PUBLIC && methodName.startsWith("test")){
-						runTestMethod(testClass, methodName, output);
+				
+				Annotation annotation = method.getAnnotation(org.junit.Test.class);
+//				if(annotation != null){
+					Request request = Request.method(testClass, methodName);
+					Result testResult = new JUnitCore().run(request);
+					
+					System.out.println("###" + testResult.wasSuccessful());
+					
+					if(testResult.getFailureCount() > 0){
+						System.out.println("###"+ methodName);
+						System.out.println(testResult.getFailures().get(0).getTrace());
 					}
-				}else{
-					org.junit.Test annotation = method.getAnnotation(org.junit.Test.class);
-					if (annotation != null) {
-						runTestMethod(testClass, methodName, output);
-					}
-				}
+				
+//				}
+				
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+//		junitCore = new JUnitCore();
+//
+//		try {
+//			// Load test case class
+//			
+//			Class testClass = Class.forName(value.toString(), true, loader);
+//			boolean isJunit3 = testClass.getSuperclass().getName().equals("junit.framework.TestCase");
+//
+//			Method[] methods = testClass.getMethods();
+//			for(int i=0; i<methods.length; i++){
+//				Method method = methods[i];
+//				String methodName = method.getName();
+//				if(isJunit3){
+//					if(method.getModifiers() == Modifier.PUBLIC && methodName.startsWith("test")){
+//						runTestMethod(testClass, methodName, output);
+//					}
+//				}else{
+//					Annotation annotation = method.getAnnotation(org.junit.Test.class);
+//					
+//					//if (annotation != null) {
+//						runTestMethod(testClass, methodName, output);
+//					//}
+//				}
+//			}
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (SecurityException e) {
+//			e.printStackTrace();
+//		} catch (IllegalArgumentException e) {
+//			e.printStackTrace();
+//		}
 
 	}
 
@@ -88,6 +138,11 @@ public class TestRunnerMapper<K> extends MapReduceBase implements
 			OutputCollector<IntWritable, Text> output) {
 		Request request = Request.method(testClass, methodName);
 		Result testResult = junitCore.run(request);
+		
+		if(testResult.getFailureCount() > 0){
+			System.out.println("###"+ methodName);
+			System.out.println(testResult.getFailures().get(0).getTrace());
+		}
 
 		try {
 			Class bm = Class.forName("insect.coverage.execution.BlockMonitor",
