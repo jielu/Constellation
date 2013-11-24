@@ -13,6 +13,8 @@ import org.apache.hadoop.mapred.Reporter;
 public class TestRunnerReducer<K> extends MapReduceBase
 	implements Reducer<IntWritable, Text, IntWritable, Text>{
 
+	static enum MyCounters { PASSED, FAILED }
+	
 	// Tarantula:
 	// http://www.st.ewi.tudelft.nl/~peterz/papers/AZG_PRDC06.pdf
 	// %failed(s) / (%passed(s) + %failed(s))
@@ -37,7 +39,12 @@ public class TestRunnerReducer<K> extends MapReduceBase
 			}
 		}
 		
-		output.collect(key, new Text(passed + ":" + failed));
+		if(key.get() == -1) {
+			reporter.incrCounter(MyCounters.PASSED, passed);
+			reporter.incrCounter(MyCounters.FAILED, failed);
+		} else {
+			output.collect(key, new Text(passed + ":" + failed));
+		}
 	}
 
 }
