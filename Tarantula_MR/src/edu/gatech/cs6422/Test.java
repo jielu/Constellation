@@ -51,13 +51,16 @@ public class Test extends Configured implements Tool {
       
       grepJob.setJobName("grep-search");
 
-      FileInputFormat.setInputPaths(grepJob, "/Users/jielu/Dropbox/workspace2013F/cs6422/hadoop-1.2.1/example/test");
+      FileInputFormat.setInputPaths(grepJob, "/Users/jielu/Dropbox/workspace2013F/cs6422/hadoop-1.2.1/example/test/");
 
       grepJob.setMapperClass(TestRunnerMapper.class);
       grepJob.set("testRunnerMapper.junit3.lib", "file:///Users/jielu/Dropbox/workspace2013F/cs6422/hadoop-1.2.1/example/lib/junit3.jar");
-      grepJob.set("testRunnerMapper.junit4.lib", "file:///Users/jielu/Dropbox/workspace2013F/cs6422/hadoop-1.2.1/example/lib/junit3.jar");
-      grepJob.set("testRunnerMapper.classpath", "file:///Users/jielu/Dropbox/insect.jar;file:///Users/jielu/Dropbox/workspace2013F/Test_ReTest/AntExample/build/testcases;file:///Users/jielu/Dropbox/workspace2013F/ReTest/deliverables/.coverage_data/AntExample_latest");
-
+      grepJob.set("testRunnerMapper.junit4.lib", "file:///Users/jielu/Dropbox/workspace2013F/cs6422/hadoop-1.2.1/example/lib/junit-4.5.jar");
+//      grepJob.set("testRunnerMapper.classpath", "file:///Users/jielu/Dropbox/insect.jar;file:///Users/jielu/Dropbox/workspace2013F/Test_ReTest/AntExample/build/testcases/;file:///Users/jielu/Dropbox/workspace2013F/ReTest/deliverables/.coverage_data/AntExample_latest/");
+///Users/jielu/Dropbox/workspace2013F/ReTest/deliverables/.coverage_data/test
+      grepJob.set("testRunnerMapper.classpath", "file:///Users/jielu/Dropbox/insect.jar;file:///Users/jielu/Dropbox/workspace2013F/cs6422/hadoop-1.2.1/example/testcase/");
+      
+      
 //      grepJob.setCombinerClass(LongSumReducer.class);
       grepJob.setReducerClass(TestRunnerReducer.class);
 //
