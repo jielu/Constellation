@@ -69,7 +69,10 @@ public class Test extends Configured implements Tool {
      grepJob.setOutputKeyClass(Text.class);
      grepJob.setOutputValueClass(LongWritable.class);
 
-      JobClient.runJob(grepJob);
+     RunningJob job = JobClient.runJob(grepJob);
+     Counters counters = job.getCounters();
+     System.out.println("Passed test cases: " + counters.getCounter(TestRunnerReducer.MyCounters.PASSED));
+     System.out.println("Failed test cases: " + counters.getCounter(TestRunnerReducer.MyCounters.FAILED));
       
  
 
