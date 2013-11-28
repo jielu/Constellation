@@ -1,0 +1,46 @@
+<html xmlns:lxslt="http://xml.apache.org/xslt" xmlns:stringutils="xalan://org.apache.tools.ant.util.StringUtils">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Unit Test Results: All Failures</title>
+<link rel="stylesheet" type="text/css" title="Style" href="stylesheet.css">
+</head>
+<body onload="open('allclasses-frame.html','classListFrame')">
+<h1>Unit Test Results.</h1>
+<table width="100%">
+<tr>
+<td align="left"></td><td align="right">Designed for use with <a href="http://www.junit.org/">JUnit</a> and <a href="http://ant.apache.org/">Ant</a>.</td>
+</tr>
+</table>
+<hr size="1">
+<h2>All Failures</h2>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Class</th><th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/apache/tools/ant/taskdefs/32_AntTest.html">AntTest</a></td><td><a name="testAntCoreLib"></a><a href="org/apache/tools/ant/taskdefs/32_AntTest.html#testAntCoreLib">testAntCoreLib</a></td><td>Failure</td><td>found ant.core.lib in: /Users/jielu/Dropbox/workspace2013F/ReTest/deliverables/.coverage_data/apache-ant<br>
+<br>
+<code>junit.framework.AssertionFailedError: found ant.core.lib in: /Users/jielu/Dropbox/workspace2013F/ReTest/deliverables/.coverage_data/apache-ant<br>	at junit.framework.Assert.fail(Assert.java:47)<br>	at junit.framework.Assert.assertTrue(Assert.java:20)<br>	at org.apache.tools.ant.taskdefs.AntTest.testAntCoreLib(AntTest.java:317)<br>	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)<br>	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>	at java.lang.reflect.Method.invoke(Method.java:606)<br>	at junit.framework.TestCase.runTest(TestCase.java:154)<br>	at junit.framework.TestCase.runBare(TestCase.java:127)<br>	at junit.framework.TestResult$1.protect(TestResult.java:106)<br>	at junit.framework.TestResult.runProtected(TestResult.java:124)<br>	at junit.framework.TestResult.run(TestResult.java:109)<br>	at junit.framework.TestCase.run(TestCase.java:118)<br>	at junit.framework.TestSuite.runTest(TestSuite.java:208)<br>	at junit.framework.TestSuite.run(TestSuite.java:203)<br>	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:520)<br>	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.launch(JUnitTestRunner.java:1060)<br>	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.main(JUnitTestRunner.java:884)<br>
+</code></td><td>0.028</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/apache/tools/ant/taskdefs/103_UnzipTest.html">UnzipTest</a></td><td><a name="testResourceCollections"></a><a href="org/apache/tools/ant/taskdefs/103_UnzipTest.html#testResourceCollections">testResourceCollections</a></td><td>Failure</td><td>junit.jar has been extracted<br>
+<br>
+<code>junit.framework.AssertionFailedError: junit.jar has been extracted<br>	at junit.framework.Assert.fail(Assert.java:47)<br>	at junit.framework.Assert.assertTrue(Assert.java:20)<br>	at org.apache.tools.ant.taskdefs.UnzipTest.assertFileExists(UnzipTest.java:169)<br>	at org.apache.tools.ant.taskdefs.UnzipTest.testResourceCollections(UnzipTest.java:199)<br>	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)<br>	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>	at java.lang.reflect.Method.invoke(Method.java:606)<br>	at junit.framework.TestCase.runTest(TestCase.java:154)<br>	at junit.framework.TestCase.runBare(TestCase.java:127)<br>	at junit.framework.TestResult$1.protect(TestResult.java:106)<br>	at junit.framework.TestResult.runProtected(TestResult.java:124)<br>	at junit.framework.TestResult.run(TestResult.java:109)<br>	at junit.framework.TestCase.run(TestCase.java:118)<br>	at junit.framework.TestSuite.runTest(TestSuite.java:208)<br>	at junit.framework.TestSuite.run(TestSuite.java:203)<br>	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:520)<br>	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.launch(JUnitTestRunner.java:1060)<br>	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.main(JUnitTestRunner.java:884)<br>
+</code></td><td>44.015</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/apache/tools/ant/util/198_JavaEnvUtilsTest.html">JavaEnvUtilsTest</a></td><td><a name="testGetExecutableMostPlatforms"></a><a href="org/apache/tools/ant/util/198_JavaEnvUtilsTest.html#testGetExecutableMostPlatforms">testGetExecutableMostPlatforms</a></td><td>Failure</td><td>/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/bin/javac is normalized and in the JRE dir<br>
+<br>
+<code>junit.framework.AssertionFailedError: /Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/bin/javac is normalized and in the JRE dir<br>	at junit.framework.Assert.fail(Assert.java:47)<br>	at junit.framework.Assert.assertTrue(Assert.java:20)<br>	at org.apache.tools.ant.util.JavaEnvUtilsTest.testGetExecutableMostPlatforms(JavaEnvUtilsTest.java:115)<br>	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)<br>	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>	at java.lang.reflect.Method.invoke(Method.java:606)<br>	at junit.framework.TestCase.runTest(TestCase.java:154)<br>	at junit.framework.TestCase.runBare(TestCase.java:127)<br>	at junit.framework.TestResult$1.protect(TestResult.java:106)<br>	at junit.framework.TestResult.runProtected(TestResult.java:124)<br>	at junit.framework.TestResult.run(TestResult.java:109)<br>	at junit.framework.TestCase.run(TestCase.java:118)<br>	at junit.framework.TestSuite.runTest(TestSuite.java:208)<br>	at junit.framework.TestSuite.run(TestSuite.java:203)<br>	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:520)<br>	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.launch(JUnitTestRunner.java:1060)<br>	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.main(JUnitTestRunner.java:884)<br>
+</code></td><td>0.001</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/apache/tools/ant/util/203_LoaderUtilsTest.html">LoaderUtilsTest</a></td><td><a name="testGetXyzSource"></a><a href="org/apache/tools/ant/util/203_LoaderUtilsTest.html#testGetXyzSource">testGetXyzSource</a></td><td>Failure</td><td>expected:&lt;...ReTest/deliverables/.coverage_data/apache-ant&gt; but was:&lt;...Test_ReTest/apache-ant-1.8.4/build/classes&gt;<br>
+<br>
+<code>junit.framework.ComparisonFailure: expected:&lt;...ReTest/deliverables/.coverage_data/apache-ant&gt; but was:&lt;...Test_ReTest/apache-ant-1.8.4/build/classes&gt;<br>	at junit.framework.Assert.assertEquals(Assert.java:81)<br>	at junit.framework.Assert.assertEquals(Assert.java:87)<br>	at org.apache.tools.ant.util.LoaderUtilsTest.testGetXyzSource(LoaderUtilsTest.java:40)<br>	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)<br>	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>	at java.lang.reflect.Method.invoke(Method.java:606)<br>	at junit.framework.TestCase.runTest(TestCase.java:154)<br>	at junit.framework.TestCase.runBare(TestCase.java:127)<br>	at junit.framework.TestResult$1.protect(TestResult.java:106)<br>	at junit.framework.TestResult.runProtected(TestResult.java:124)<br>	at junit.framework.TestResult.run(TestResult.java:109)<br>	at junit.framework.TestCase.run(TestCase.java:118)<br>	at junit.framework.TestSuite.runTest(TestSuite.java:208)<br>	at junit.framework.TestSuite.run(TestSuite.java:203)<br>	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:520)<br>	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.launch(JUnitTestRunner.java:1060)<br>	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.main(JUnitTestRunner.java:884)<br>
+</code></td><td>0.004</td>
+</tr>
+</table>
+</body>
+</html>

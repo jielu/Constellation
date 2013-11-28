@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="Jies-MacBook-Pro.local" name="org.apache.tools.ant.ProjectHelperRepositoryTest" tests="3" time="0.021" timestamp="2013-11-24T23:35:09">
+  <properties>
+    <property name="file.encoding.pkg" value="sun.io" />
+    <property name="type.package" value="org/apache/tools/ant/types" />
+    <property name="script.dir" value="src/script" />
+    <property name="optional.type.package" value="org/apache/tools/ant/types/optional" />
+    <property name="dist.base.manual" value="distribution/manual" />
+    <property name="javac.source" value="1.6" />
+    <property name="tests.etc.dir" value="src/etc/testcases" />
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/jre" />
+    <property name="java.dir" value="src/main" />
+    <property name="bootstrap.jar" value="ant-bootstrap.jar" />
+    <property name="tests.are.on.system.classpath" value="true" />
+    <property name="src.junit" value="src/tests/junit" />
+    <property name="build.instrumented-classes" value="/Users/jielu/Dropbox/workspace2013F/ReTest/deliverables/.coverage_data/apache-ant/" />
+    <property name="env.DISPLAY" value="/tmp/launch-2oYhyJ/org.macosforge.xquartz:0" />
+    <property name="debug" value="true" />
+    <property name="env.SECURITYSESSIONID" value="186a4" />
+    <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/jre/lib/endorsed" />
+    <property name="env.LOGNAME" value="jielu" />
+    <property name="antunit.xml" value="/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/build/antunit/xml" />
+    <property name="src.dir" value="src" />
+    <property name="sun.os.patch.level" value="unknown" />
+    <property name="rcfile" value="/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/dejavoo/apache-ant.jrc" />
+    <property name="java.vendor.url" value="http://java.oracle.com/" />
+    <property name="dist.javadocs" value="dist/manual/api" />
+    <property name="env.TERM_PROGRAM_VERSION" value="309" />
+    <property name="java.version" value="1.7.0_45" />
+    <property name="optional.jars.whenmanifestonly" value="skip" />
+    <property name="build.junit.reports" value="/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/build/testcases/reports" />
+    <property name="chmod.maxparallel" value="250" />
+    <property name="expandproperty.files" value="**/version.txt,**/defaultManifest.mf" />
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+    <property name="ant.project.invoked-targets" value="junit-tests" />
+    <property name="env.Apple_Ubiquity_Message" value="/tmp/launch-PtDHpv/Apple_Ubiquity_Message" />
+    <property name="src.dist.lib" value="dist-src/lib" />
+    <property name="junit.excludes" value="" />
+    <property name="user.name" value="jielu" />
+    <property name="env.LANG" value="en_US.UTF-8" />
+    <property name="build.lib-src" value="build/lib-src" />
+    <property name="sun.io.unicode.encoding" value="UnicodeBig" />
+    <property name="sun.jnu.encoding" value="UTF-8" />
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
+    <property name="src.dist.dir" value="dist-src" />
+    <property name="test.junit.vmargs" value="" />
+    <property name="optimize" value="true" />
+    <property name="lib.dir" value="lib" />
+    <property name="project.version" value="1.8.4" />
+    <property name="java.specification.name" value="Java Platform API Specification" />
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
+    <property name="user.timezone" value="" />
+    <property name="path.separator" value=":" />
+    <property name="file.encoding" value="UTF-8" />
+    <property name="ant.project.default-target" value="main" />
+    <property name="env.HOME" value="/Users/jielu" />
+    <property name="swing.present" value="true" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner testsfile=/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/junittestcases8267593923065071304.properties filtertrace=false haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/build/testcases/xml/IGNORETHIS.xml formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=insect.ant.FlushTestFormatter,/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/build/testcases/xml/IGNORETHISnull crashfile=/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/junitvmwatcher661302187560598112.properties propsfile=/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/junit7337813539953586879.properties" />
+    <property name="env.TERM_SESSION_ID" value="F47A5549-DCB5-4354-9B44-687A2EA1B2B3" />
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
+    <property name="ant.file" value="/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/build.xml" />
+    <property name="groupid" value="org/apache/ant" />
+    <property name="tests.and.ant.share.classloader" value="true" />
+    <property name="build.javadocs" value="build/javadocs" />
+    <property name="java.io.tmpdir" value="/var/folders/cj/r_rvfbz12fd_8bj8_kvn_g2w0000gn/T/" />
+    <property name="TODAY" value="November 24 2013" />
+    <property name="user.language" value="en" />
+    <property name="junit.fork" value="true" />
+    <property name="line.separator" value="&#xa;" />
+    <property name="src.antunit" value="src/tests/antunit" />
+    <property name="ant.file.type" value="file" />
+    <property name="run.junit" value="true" />
+    <property name="dist.manual" value="dist/manual" />
+    <property name="name" value="ant" />
+    <property name="junit.filtertrace" value="off" />
+    <property name="java.vm.info" value="mixed mode" />
+    <property name="manifest" value="src/etc/manifest" />
+    <property name="ant.file.type.apache-ant" value="file" />
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+    <property name="ignoresystemclasses" value="true" />
+    <property name="env.__CF_USER_TEXT_ENCODING" value="0x1F5:0:0" />
+    <property name="dejavoo.dir" value="/Users/jielu/Dropbox/workspace2013F/ReTest/deliverables" />
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
+    <property name="tests-classpath.value" value="/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/build/classes:/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/lib/optional/junit.jar:/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/build/testcases:/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/src/tests/junit:/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/src/etc/testcases:/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/lib/tools.jar" />
+    <property name="env.JAVA_MAIN_CLASS_10133" value="org.apache.tools.ant.launch.Launcher" />
+    <property name="Name" value="Apache Ant" />
+    <property name="program.name" value="apache-ant" />
+    <property name="bootstrap.dir" value="bootstrap" />
+    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob" />
+    <property name="build.tests" value="/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/build/testcases" />
+    <property name="src.dist.manual" value="dist-src/manual" />
+    <property name="pom.version" value="1.8.4" />
+    <property name="ant.version" value="Apache Ant(TM) version 1.8.2 compiled on June 16 2012" />
+    <property name="antunit.reports" value="/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/build/antunit/reports" />
+    <property name="regexp.package" value="org/apache/tools/ant/util/regexp" />
+    <property name="gopherProxySet" value="false" />
+    <property name="dist.etc" value="dist/etc" />
+    <property name="dist.base.source" value="distribution/source" />
+    <property name="os.name" value="Mac OS X" />
+    <property name="java.specification.vendor" value="Oracle Corporation" />
+    <property name="env.TERM" value="xterm-256color" />
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM" />
+    <property name="sun.tools.present" value="true" />
+    <property name="java.library.path" value="/Users/jielu/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:." />
+    <property name="env.PATH" value="/usr/local/bin:/Users/jielu/mongodb/mongodb-osx-x86_64-2.4.8/bin:/opt/local/bin/:/opt/subversion/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin" />
+    <property name="ant.java.version" value="1.7" />
+    <property name="junit.batch" value="true" />
+    <property name="basedir" value="/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4" />
+    <property name="java.class.version" value="51.0" />
+    <property name="env.SHLVL" value="1" />
+    <property name="ant.home" value="/usr/share/ant" />
+    <property name="resource.dir" value="src/resources" />
+    <property name="junit.collector.dir" value="build/failingTests" />
+    <property name="build.lib" value="build/lib" />
+    <property name="util.package" value="org/apache/tools/ant/util" />
+    <property name="junit.includes" value="**/*Test*" />
+    <property name="junit.forkmode" value="once" />
+    <property name="java-repository.dir" value="java-repository/org/apache/ant" />
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/jre/lib" />
+    <property name="build.dir" value="build" />
+    <property name="dist.base.binaries" value="distribution/binaries" />
+    <property name="build.classes" value="build/classes" />
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment" />
+    <property name="year" value="2013" />
+    <property name="env.USER" value="jielu" />
+    <property name="manual.dir" value="manual" />
+    <property name="exist.latestRun" value="false" />
+    <property name="env.TERM_PROGRAM" value="Apple_Terminal" />
+    <property name="run.junit.report" value="true" />
+    <property name="antunit.loglevel" value="none" />
+    <property name="env.COMMAND_MODE" value="unix2003" />
+    <property name="ant.project.name" value="apache-ant" />
+    <property name="chmod.fail" value="true" />
+    <property name="java.vm.specification.version" value="1.7" />
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit" />
+    <property name="sun.cpu.isalist" value="" />
+    <property name="java.ext.dirs" value="/Users/jielu/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java" />
+    <property name="os.version" value="10.8.5" />
+    <property name="build.junit.xml" value="/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/build/testcases/xml" />
+    <property name="dist.base" value="distribution" />
+    <property name="user.home" value="/Users/jielu" />
+    <property name="java.vm.vendor" value="Oracle Corporation" />
+    <property name="jmf.present" value="true" />
+    <property name="junit.summary" value="no" />
+    <property name="ant.package" value="org/apache/tools/ant" />
+    <property name="user.dir" value="/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4" />
+    <property name="offline" value="${offline}" />
+    <property name="env.PWD" value="/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4" />
+    <property name="build.compiler" value="modern" />
+    <property name="not.exist.latestRun" value="true" />
+    <property name="sun.cpu.endian" value="little" />
+    <property name="jdk1.7+" value="true" />
+    <property name="insect.path" value="/Users/jielu/Dropbox/workspace2013F/ReTest/deliverables/lib/insect.jar:/Users/jielu/Dropbox/workspace2013F/ReTest/deliverables/lib/fastutil-6.5.4.jar" />
+    <property name="build.tests.value" value="/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/build/testcases" />
+    <property name="env.TMPDIR" value="/var/folders/cj/r_rvfbz12fd_8bj8_kvn_g2w0000gn/T/" />
+    <property name="dist.name" value="apache-ant-1.8.4" />
+    <property name="deprecation" value="false" />
+    <property name="dist.lib" value="dist/lib" />
+    <property name="java.vm.version" value="24.45-b08" />
+    <property name="java.class.path" value="/Users/jielu/Dropbox/workspace2013F/ReTest/deliverables/.coverage_data/apache-ant:/Users/jielu/Dropbox/workspace2013F/ReTest/deliverables/lib/insect.jar:/Users/jielu/Dropbox/workspace2013F/ReTest/deliverables/lib/fastutil-6.5.4.jar:/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/build/classes:/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/lib/optional/junit.jar:/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/build/testcases:/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/src/tests/junit:/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/src/etc/testcases:/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/lib/tools.jar:/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/build/failingTests:/usr/share/java/ant-1.8.2/lib/ant-launcher.jar:/usr/share/ant/lib/ant.jar:/usr/share/ant/lib/ant-junit.jar:/usr/share/ant/lib/ant-junit4.jar" />
+    <property name="DSTAMP" value="20131124" />
+    <property name="ant.library.dir" value="/usr/share/ant/lib" />
+    <property name="os.arch" value="x86_64" />
+    <property name="env.Apple_PubSub_Socket_Render" value="/tmp/launch-Q9leeK/Render" />
+    <property name="dejavoo.target" value="/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/dejavoo" />
+    <property name="dist.dir" value="dist" />
+    <property name="sun.java.launcher" value="SUN_STANDARD" />
+    <property name="src.dist.src" value="dist-src/src" />
+    <property name="build.tests.javadocs" value="build/javadocs.test/" />
+    <property name="ant.core.lib" value="/usr/share/ant/lib/ant.jar" />
+    <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+    <property name="TSTAMP" value="1834" />
+    <property name="dist.bin" value="dist/bin" />
+    <property name="file.separator" value="/" />
+    <property name="optional.jars.prefix" value="ant" />
+    <property name="jdk1.6+" value="true" />
+    <property name="junit.present" value="true" />
+    <property name="test.haltonfailure" value="false" />
+    <property name="root" value="/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4" />
+    <property name="java.runtime.version" value="1.7.0_45-b18" />
+    <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/jre/lib/JObjC.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/jre/classes" />
+    <property name="env.SSH_AUTH_SOCK" value="/tmp/launch-mcIftz/Listeners" />
+    <property name="junit.collector.class" value="FailedTests" />
+    <property name="xmlschema.present" value="true" />
+    <property name="ant.junit.failureCollector" value="build/failingTests/FailedTests" />
+    <property name="taskdefs.package" value="org/apache/tools/ant/taskdefs" />
+    <property name="manifest-version" value="1.8.4" />
+    <property name="user.country" value="US" />
+    <property name="etc.dir" value="src/etc" />
+    <property name="env.SHELL" value="/bin/bash" />
+    <property name="apache.resolver.type.package" value="org/apache/tools/ant/types/resolver" />
+    <property name="optional.package" value="org/apache/tools/ant/taskdefs/optional" />
+    <property name="javac.target" value="1.6" />
+    <property name="manifest.tmp" value="build/optional.manifest" />
+    <property name="java.vendor" value="Oracle Corporation" />
+    <property name="condition.package" value="org/apache/tools/ant/taskdefs/condition" />
+    <property name="jdk1.5+" value="true" />
+    <property name="ant.file.apache-ant" value="/Users/jielu/Dropbox/workspace2013F/Test_ReTest/apache-ant-1.8.4/build.xml" />
+    <property name="java.specification.version" value="1.7" />
+    <property name="sun.arch.data.model" value="64" />
+  </properties>
+  <testcase classname="org.apache.tools.ant.ProjectHelperRepositoryTest" name="testFind" time="0.002" />
+  <testcase classname="org.apache.tools.ant.ProjectHelperRepositoryTest" name="testNoDefaultContructor" time="0.005" />
+  <testcase classname="org.apache.tools.ant.ProjectHelperRepositoryTest" name="testUnkwnowHelper" time="0.001" />
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
