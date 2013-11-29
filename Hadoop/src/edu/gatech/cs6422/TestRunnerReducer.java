@@ -13,14 +13,6 @@ import org.apache.hadoop.mapred.Reporter;
 public class TestRunnerReducer<K> extends MapReduceBase implements
 		Reducer<IntWritable, Text, IntWritable, Text> {
 
-	// Tarantula:
-	// http://www.st.ewi.tudelft.nl/~peterz/papers/AZG_PRDC06.pdf
-	// %failed(s) / (%passed(s) + %failed(s))
-	// %failed(s) : the number of failed test cases executed s, to total number
-	// of failed test cases
-	// %passed(s) : the number of passed test cases executed s, to total number
-	// of passed test cases
-
 	@Override
 	public void reduce(IntWritable key, Iterator<Text> values,
 			OutputCollector<IntWritable, Text> output, Reporter reporter)

@@ -24,6 +24,7 @@ import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.*;
@@ -52,23 +53,16 @@ public class Test extends Configured implements Tool {
 
 			grepJob.setJobName("grep-search");
 
-			FileInputFormat.setInputPaths(grepJob,
-					args[0]);
+			FileInputFormat.setInputPaths(grepJob, args[0]);
 
 			grepJob.setMapperClass(TestRunnerMapper.class);
-			grepJob.set(
-					"testRunnerMapper.junit4.lib",
-					args[1]);
-			grepJob.set(
-					"testRunnerMapper.junit3.lib",
-					args[2]);
-			grepJob.set(
-					"testRunnerMapper.classpath",
-					args[3]);
+			grepJob.set("testRunnerMapper.junit4.lib", args[1]);
+			grepJob.set("testRunnerMapper.junit3.lib", args[2]);
+			grepJob.set("testRunnerMapper.classpath", args[3]);
 
-			// grepJob.setCombinerClass(LongSumReducer.class);
+			grepJob.setCombinerClass(LongSumReducer.class);
 			grepJob.setReducerClass(TestRunnerReducer.class);
-			//
+			
 			FileOutputFormat.setOutputPath(grepJob, tempDir);
 			grepJob.setOutputFormat(SequenceFileOutputFormat.class);
 			grepJob.setOutputKeyClass(IntWritable.class);
@@ -76,10 +70,27 @@ public class Test extends Configured implements Tool {
 
 			RunningJob job = JobClient.runJob(grepJob);
 			Counters counters = job.getCounters();
-			System.out.println("Passed test cases: "
-					+ counters.getCounter(TestRunnerMapper.MyCounters.PASSED));
-			System.out.println("Failed test cases: "
-					+ counters.getCounter(TestRunnerMapper.MyCounters.FAILED));
+			long totalPass = counters.getCounter(TestRunnerMapper.MyCounters.PASSED);
+			long totalFail = counters.getCounter(TestRunnerMapper.MyCounters.FAILED);
+			System.out.println("Passed test cases: " + totalPass);
+			System.out.println("Failed test cases: " + totalFail);
+
+			
+			JobConf tarantulaJob = new JobConf(getConf(), Test.class);
+			tarantulaJob.setJobName("tarantula-calculation");
+			
+			FileInputFormat.setInputPaths(tarantulaJob, tempDir);
+			tarantulaJob.setInputFormat(SequenceFileInputFormat.class);
+			
+			tarantulaJob.setMapperClass(TarantulaMapper.class);
+			tarantulaJob.set("totalPass", String.valueOf(totalPass));
+			tarantulaJob.set("totalFail", String.valueOf(totalFail));
+			
+			tarantulaJob.setNumReduceTasks(1);
+			FileOutputFormat.setOutputPath(tarantulaJob, new Path("output"));
+			tarantulaJob.setOutputKeyComparatorClass(LongWritable.DecreasingComparator.class);
+			
+			JobClient.runJob(tarantulaJob);
 
 			// JobConf sortJob = new JobConf(getConf(), Test.class);
 			// sortJob.setJobName("grep-sort");
@@ -100,7 +111,7 @@ public class Test extends Configured implements Tool {
 		}
 		return 0;
 	}
-
+	
 	public static void main(String[] args) throws Exception {
 		int res = ToolRunner.run(new Configuration(), new Test(), args);
 		System.exit(res);

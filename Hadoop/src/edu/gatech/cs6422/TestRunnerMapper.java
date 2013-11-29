@@ -65,8 +65,15 @@ public class TestRunnerMapper<K> extends MapReduceBase implements
 		try {
 			// Load test case class
 			Class testClass = Class.forName(value.toString(), true, loader);
-			boolean isJunit3 = testClass.getSuperclass().getName()
-					.equals("junit.framework.TestCase");
+			// Check whether is junit3 test case
+			Class c = testClass;
+			boolean isJunit3 = false;
+			while((c=c.getSuperclass()) != null){
+				if(c.getName().equals("junit.framework.TestCase")){
+					isJunit3 = true;
+					break;
+				}
+			}
 
 			Method[] methods = testClass.getMethods();
 			for (int i = 0; i < methods.length; i++) {
