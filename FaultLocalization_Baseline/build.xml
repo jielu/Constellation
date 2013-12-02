@@ -1,0 +1,118 @@
+<project name="bpgen_experiments" basedir=".">
+	<!-- the values of these two properties should be passed via command line -->
+	<property name="version" value=""/>
+	<property name="fault" value=""/>
+	<property name="lib.junit" value="libs/junit-4.10.jar"/>	
+	<property name="lib.junit.runner" value="libs/junit_runner.jar"/>
+	<property name="lib.insectj.runtime" value="libs/insectj/runtime.jar"/>
+	<property name="lib.insectj.probes" value="libs/insectj/probes.jar"/>
+	<property name="lib.insectj.config" location="libs/insectconfig.xml"/>
+	<property name="lib.statistics.runner" value="libs/statitics_runner.jar"/>
+
+	<property name="tmp.src" value="tmp/src"/>
+	<property name="tmp.test" value="tmp/test"/>
+	<property name="tmp.bin" value="tmp/src_bin"/>
+	<property name="tmp.test.bin" value="tmp/test_bin"/>
+	<property name="docs" value="docs"/>
+
+	<property name="compile.version" value="1.6"/>
+	
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp/>
+		<delete dir="${tmp.src}"/>
+		<delete dir="${tmp.test}"/>
+		<delete dir="${tmp.bin}"/>
+		<delete dir="${tmp.test.bin}"/>
+
+		<mkdir dir="${tmp.src}"/>
+		<mkdir dir="${tmp.test}"/>
+		<mkdir dir="${tmp.bin}"/>
+		<mkdir dir="${tmp.test.bin}"/>
+	</target>
+
+	<target name="compile" depends="init">
+		<property name="jtopas.tmp.src.dir" value="leetcode-src/"/>
+
+		<javac srcdir="${jtopas.tmp.src.dir}" destdir="${tmp.bin}" debug="true" />
+		<!-- copy the resources in the source directory into the binary directory -->
+		<copy todir="${tmp.bin}">
+			<fileset dir="${jtopas.tmp.src.dir}">
+				<exclude name="**/*.java"/>
+				<exclude name="**/*.class"/>
+			</fileset>
+		</copy>
+
+		<!-- Compile the junit tests for jtopas of version n -->
+		<property name="jtopas.test.src.dir" value="leetcode-testsrc"/>	                
+		<javac srcdir="${jtopas.test.src.dir}" destdir="${tmp.test.bin}" debug="true" target="${compile.version}"  source="${compile.version}"> 
+			<classpath>
+				<pathelement path="${tmp.bin}"/>
+				<pathelement location="${lib.junit}"/>
+			</classpath> 
+		</javac>
+
+		<copy todir="${tmp.test.bin}">
+                	<fileset dir="${jtopas.test.src.dir}"> 
+				<!-- <exclude name="**/*.java"/> -->
+				<exclude name="**/*.class"/>
+			</fileset>
+		</copy>
+    </target>
+
+    <target name="junit" depends="compile">
+        <!-- Run the junit tests -->
+        <java classname="edu.gatech.ir.JunitRunner" fork="true" maxmemory="1024m">
+                <classpath>
+                        <pathelement path="${tmp.test.bin}"/>
+                        <pathelement path="${tmp.bin}"/>
+                        <pathelement path="${lib.junit.runner}"/>
+                        <pathelement path="${lib.junit}"/>
+                </classpath>
+                <arg value="edu.gatech.common.TestAll"/>
+		<arg value="failureReport"/>
+        </java>
+    </target>
+
+    <target name="stat" depends="compile">
+	<echo> Generate the configuration file for InsECTJ </echo>
+	<java classname="edu.gatech.ir.teststats.config.InsectjConfigGenerator" fork="true">
+	    <classpath>
+                <pathelement path="${lib.statistics.runner}"/>
+	    </classpath>
+	    <arg value="${lib.insectj.config}"/>
+	    <arg value="${tmp.bin}"/> 
+	</java>
+	<mkdir dir="traces/leetcode/failed/"/>
+        <mkdir dir="traces/leetcode/passed/"/>
+
+	<echo>About to invoke InsECTJ...</echo>
+        <java classname="edu.gatech.ir.teststats.runner.JTopasNNTestRunner" fork="true" maxmemory="1024m">
+	    <jvmarg value="-javaagent:${lib.insectj.runtime}=${lib.insectj.config}"/>
+	    <classpath>
+		<pathelement path="${lib.insectj.probes}"/>
+		<pathelement path="${tmp.test.bin}"/>
+		<pathelement path="${tmp.bin}"/>
+		<pathelement path="${lib.statistics.runner}"/>
+		<pathelement path="${lib.junit}"/>
+	    </classpath>
+	    <arg value="edu.gatech.common.TestAll"/>  
+            <arg value="traces/leetcode/failed/"/>
+            <arg value="traces/leetcode/passed/"/>
+	    <arg value="traces/leetcode/bbMap.txt"/>
+	    <arg value="traces/leetcode/failedTestCase.txt"/>
+	</java>
+
+	<echo> Perform the statistics debugging... </echo>
+	<java classname="edu.gatech.ir.ochiai.Runner" fork="true">
+	    <classpath>
+		<pathelement path="${lib.statistics.runner}"/>
+	    </classpath>
+	    <arg value="traces/leetcode/passed/"/>
+	    <arg value="traces/leetcode/failed/"/>
+	    <arg value="traces/leetcode/bbMap.txt"/>
+	    <arg value="traces/leetcode/stat.txt"/>
+	</java>
+    </target>
+
+</project>	

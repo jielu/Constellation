@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<insectconfig>
+<settings dump="false" dumpdir="" verbose="false"/>
+<probe arguments="" class="edu.gatech.cc.rtinsect.inserters.BasicBlockProbeInserter" monitor="edu.gatech.ir.teststats.record.NNBasicBlockMonitor"/>
+<instrument>
+edu.gatech.scrambleString.Solution
+edu.gatech.DistinctSubsequences.Solution
+edu.gatech.pow.Solution
+edu.gatech.plusone.Solution
+</instrument>
+</insectconfig>
