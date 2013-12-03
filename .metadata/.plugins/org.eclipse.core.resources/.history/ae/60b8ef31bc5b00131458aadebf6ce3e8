@@ -1,0 +1,109 @@
+package edu.gatech.cs6422;
+
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Properties;
+
+import org.apache.hadoop.filecache.DistributedCache;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapred.JobConf;
+import org.apache.hadoop.mapred.MapReduceBase;
+import org.apache.hadoop.mapred.Mapper;
+import org.apache.hadoop.mapred.OutputCollector;
+import org.apache.hadoop.mapred.Reporter;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Request;
+import org.junit.runner.Result;
+
+public class InstrumentorMap<K> extends MapReduceBase implements
+		Mapper<K, Text, Text, Text> {
+	// Input: Value (Text): fully qualified test class name
+	// Output: Key (IntWritable): basic block id
+	// Output: Value (Text): covered test case(method) name and test result,
+	// e.g. test1.test1:P, test1.test1:F
+	private JUnitCore junitCore;
+
+	static enum MyCounters {
+		PASSED, FAILED
+	}
+	
+	public void configure(JobConf job) {
+		
+	}
+
+	@Override
+	public void map(K key, Text value,
+			OutputCollector<Text, Text> output, Reporter reporter)
+			throws IOException {
+		junitCore = new JUnitCore();
+
+		try {
+			// Load test case class
+			Class testClass = Class.forName(value.toString());
+		
+			// Check whether is junit3 test case
+			Class c = testClass;
+			boolean isJunit3 = false;
+			while((c=c.getSuperclass()) != null){
+				if(c.getName()
+					.equals("junit.framework.TestCase")){
+					isJunit3 = true;
+					break;
+				}
+			}
+
+			Method[] methods = testClass.getMethods();
+			for (int i = 0; i < methods.length; i++) {
+				Method method = methods[i];
+				String methodName = method.getName();
+				if (isJunit3) {
+					if (method.getModifiers() == Modifier.PUBLIC
+							&& methodName.startsWith("test")) {
+						runTestMethod(testClass, methodName, output, reporter);
+					}
+				} else {
+					org.junit.Test annotation = method
+							.getAnnotation(org.junit.Test.class);
+					if (annotation != null) {
+						runTestMethod(testClass, methodName, output, reporter);
+					}
+				}
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	// Run test method and get coverage data
+	private void runTestMethod(Class testClass, String methodName,
+			OutputCollector<Text, Text> output, Reporter reporter) throws IOException {
+		Request request = Request.method(testClass, methodName);
+		Result testResult = junitCore.run(request);
+		String result = "T";
+		if(!testResult.wasSuccessful()){
+//			result = testResult.getFailures().get(0).getException().getMessage();
+			testResult.getFailures().get(0).getException().printStackTrace();
+//			
+			result = "F";
+		}
+	    
+		
+		output.collect(new Text(testClass.getName() + "." + methodName), new Text(result));
+	
+	}
+
+}
