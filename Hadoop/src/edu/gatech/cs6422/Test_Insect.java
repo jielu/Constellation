@@ -60,12 +60,12 @@ public class Test_Insect extends Configured implements Tool {
 		try {
 		
 			grepJob.setJobName("test_instrumentation");
-//			grepJob.setInputFormat(NLineInputFormat.class);
-//			NLineInputFormat.setInputPaths(grepJob,
-//					input_path);
-//			grepJob.setInt("mapred.line.input.format.linespermap", 1);
-			FileInputFormat.setInputPaths(grepJob,
+			grepJob.setInputFormat(NLineInputFormat.class);
+			NLineInputFormat.setInputPaths(grepJob,
 					input_path);
+			grepJob.setInt("mapred.line.input.format.linespermap", 110);
+//			FileInputFormat.setInputPaths(grepJob,
+//					input_path);
 			
 			grepJob.setMapperClass(InstrumentorMapper.class);
 
