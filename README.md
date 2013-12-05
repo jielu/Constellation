@@ -28,9 +28,14 @@ The completed code for our solution including the customized subjects are at git
 - Instrumentation_Baseline
   # The customized subjects to test instrumentation baseline. 
 
-
+Section 2: Run executables
+1. Run Java Program Instrumentor
   bin/hadoop fs -mkdir /insect
   bin/hadoop fs -mkdir /insect/insect_input
   bin/hadoop fs -copyFromLocal ../Instrumentation_Baseline/ant/* /insect/insect_input
   bin/hadoop jar ../Instrumentation_Baseline/ant/test_insect.jar 
-
+2. Run JUnit Testcases Runner & Fault Locator together
+  Let's use Apache Common Collector as an example, the necessary jar and other resource files are stored in subjects/common.
+  bin/hadoop fs -cp subjects/common /common
+  bin/hadoop jar ../subjects/common/test_common.jar
+Then you can see the intermediate result and running status from the console, and finally the result will be stores in /common/output.
