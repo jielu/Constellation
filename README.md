@@ -30,10 +30,23 @@ The completed code for our solution including the customized subjects are at git
 
 Section 2: Run executables
 1. Run Java Program Instrumentor
+1) Prepare your subject to be instrumented. Suppose your subject is in ../Instrumentation_Baseline/ant. The directory structure should be as below:
+- classes
+  Put your compiled classes to this folder. 
+- input
+  Create a text file to list the path to each class file. Make sure each entry starts with "insect_input" as below, because we are going to put your classes to "insect_input" folder. 
+  insect_input/classes/org/apache/tools/ant/AntClassLoader$ResourceEnumeration.class
+- lib
+  Just copy the lib in our example. 
+2) Run the following commands or put them together into one single bash script. test_insect.jar is the executable to instrument your program. 
   bin/hadoop fs -mkdir /insect
   bin/hadoop fs -mkdir /insect/insect_input
   bin/hadoop fs -copyFromLocal ../Instrumentation_Baseline/ant/* /insect/insect_input
   bin/hadoop jar ../Instrumentation_Baseline/ant/test_insect.jar 
+3) You can get the instrumented class files by running the following command line to your local drive:
+  bin/hadoop fs -get /insect/insect_output ~/Download
+
+  
 2. Run JUnit Testcases Runner & Fault Locator together
   Let's use Apache Common Collector as an example, the necessary jar and other resource files are stored in subjects/common.
   bin/hadoop fs -cp subjects/common /common
